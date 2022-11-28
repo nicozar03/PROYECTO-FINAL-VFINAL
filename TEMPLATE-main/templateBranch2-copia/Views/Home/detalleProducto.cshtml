@@ -1,0 +1,122 @@
+@{
+    ViewData["Title"] = "DetalleProducto";
+}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script>
+function myfunction() {   
+    Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your work has been saved',
+  showConfirmButton: false,
+  timer: 2000
+})
+
+
+         }  
+</script>
+<section class="bg-light">
+        <div class="container pb-5">
+            <div class="row">
+                <div class="col-lg-5 col-sm-12 mt-5">
+                    <div class="card mb-3" id="card">
+                        <img class="detail-img" src="@ViewBag.Producto.foto" alt="Card image cap" id="product-detail">
+                    </div>
+                    <div class="row">
+                        <!--Start Carousel Wrapper-->
+                        <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
+                            <!--Start Slides-->
+                            <div class="carousel-inner product-links-wap" role="listbox">
+
+                                <!--First slide-->
+                                <div class="carousel-item active">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <a href="#">
+                                                <img class="card-img img-fluid more-img" src="@ViewBag.Producto.foto" alt="Product Image 1">
+                                            </a>
+                                        </div>
+                                        <div class="col-4">
+                                            <a href="#">
+                                                <img class="card-img img-fluid more-img" src="@ViewBag.Producto.foto2" alt="Product Image 2">
+                                            </a>
+                                        </div>
+                                        <div class="col-4">
+                                            <a href="#">
+                                                <img class="card-img img-fluid more-img" src="@ViewBag.Producto.foto3" alt="Product Image 3">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/.First slide-->
+
+
+                            </div>
+                            <!--End Slides-->
+                        </div>
+                        <!--End Carousel Wrapper-->
+                    </div>
+                </div>
+                <!-- col end -->
+                <div class="col-lg-7 mt-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="h2">@ViewBag.Producto.nombre</h1>
+                            <p class="h3 py-2">$@ViewBag.Producto.precio</p>
+                            <p class="py-2">
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-secondary"></i>
+                                <span class="list-inline-item text-dark">Rating 4.8 | 36 Comentarios</span>
+                            </p>
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <h6>Marca:</h6>
+                                </li>
+                                <li class="list-inline-item">
+                                    <p class="text-muted"><strong>@ViewBag.Producto.marca</strong></p>
+                                </li>
+                            </ul>
+
+                            <h6>Descripcion:</h6>
+                            <p>@ViewBag.Producto.descripcion</p>
+                            
+
+                           
+
+                            <form action='@Url.Action("AgregarProducto","Home", new{idProducto = @ViewBag.Producto.idProducto, nombre = @ViewBag.Producto.nombre, descripcion = @ViewBag.Producto.descripcion, foto= @ViewBag.Producto.foto, marca= @ViewBag.Producto.marca, precio = @ViewBag.Producto.precio, stock=@ViewBag.Producto.stock, destacado =@ViewBag.Producto.destacado, cantidad=@ViewBag.Producto.cantidad })' method="GET">
+                                    <input type="hidden" name="idProducto" value="@ViewBag.Producto.idProducto">
+                                <input type="hidden" name="nombre" value="@ViewBag.Producto.nombre">
+                                <input type="hidden" name="descripcion" value="@ViewBag.Producto.descripcion">
+                                <input type="hidden" name="foto" value="@ViewBag.Producto.foto">
+                                <input type="hidden" name="precio" value="@ViewBag.Producto.precio">
+                                <div class="row">
+                                   
+                                    <div class="col-auto">
+                                        <ul class="list-inline pb-3">
+                                            <li class="list-inline-item text-right">
+                                                Cantidad
+                                                <input type="hidden" name="cantidad" id="product-quanity" value="1">
+                                            </li>
+                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
+                                            <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
+                                            <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row pb-3">
+                                    <div class="col d-grid">
+                                        <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard"   class="link-text" id="btn-buy" onclick="myfunction()" >AGREGAR AL CARRITO</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

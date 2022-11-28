@@ -1,0 +1,132 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<script>
+
+
+var myModal = document.getElementById('myModal')
+myModalEl.addEventListener('hidden.bs.modal', function (event) {
+  document.getElementById("myModal").style.display = "block";
+})
+</script>
+
+
+
+<script>
+function ocultarModal() 
+{
+    document.getElementById("myModal").style.display = "none";
+}
+</script>
+
+
+
+<div class="modal" tabindex="-1" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cookies y politica de privacidad</h5>
+      </div>
+      <div class="modal-body">
+        <p>Para que este sitio funcione necesitamos encarecidamente que aceptes la implementación de cookies. Su información nunca será compartida con terceros</p>
+      </div>
+      <div class="modal-footer">
+       <a href= '@Url.Action("IniciarCarrito","Home")' onclick="ocultarModal()" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Aceptar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Start Categories of The Month -->
+    <section class="container py-5">
+        
+        <div class="row text-center pt-3">
+            <div class="col-lg-6 m-auto">
+                <h1 class="h1">Categorias destacadas</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href='@Url.Action("productosSubcategorias","Home", new{idSubCategoria = 2})'><img src="~/img/lapices.jpg" class="rounded-circle img-fluid border"></a>
+                <h5 class="text-center mt-3 mb-3">Lapices</h5>
+                <p class="text-center"><a href='@Url.Action("productosSubcategorias","Home", new{idSubCategoria = 2})' class="btn btn-success">Comprar</a></p>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href='@Url.Action("productosSubcategorias","Home", new{idSubCategoria = 1})'><img src="~/img/cuadernos.jpg" class="rounded-circle img-fluid border"></a>
+                <h2 class="h5 text-center mt-3 mb-3">Cuadernos</h2>
+                <p  class="text-center"><a href='@Url.Action("productosSubcategorias","Home", new{idSubCategoria = 1})' class="btn btn-success">Comprar</a></p>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href='@Url.Action("productosSubcategorias","Home", new{idSubCategoria = 9})'><img src="~/img/resaltadores.jpg" class="rounded-circle img-fluid border"></a>
+                <h2 class="h5 text-center mt-3 mb-3">Resaltadores</h2>
+                <p class="text-center"><a href='@Url.Action("productosSubcategorias","Home", new{idSubCategoria = 9})' class="btn btn-success">Comprar</a></p>
+            </div>
+        </div>
+    </section>
+    <!-- End Categories of The Month -->
+
+
+    <!-- Start Featured Product -->
+   
+
+<section class="bg-light">
+        <div class="container py-5">
+            <div class="row text-center py-3">
+                <div class="col-lg-6 m-auto">
+                    <h1 class="h1">Productos destacados</h1>
+                    <p>
+                        Estos son los productos mas recomendados por nuestros clientes, cuentan con excelentes calificaciones y el mejor precio del mercado.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row">
+            @{
+                  foreach(Producto productos in @ViewBag.producto){   
+              <div class="col-12 col-md-4 mb-4">
+                    <div class="card h-100 product-wap rounded-0">
+                    <div class="card rounded-0">
+                    <div class="center">
+                            <img src="@productos.foto" class=" product-image" alt="Foto producto">
+                     <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                            <ul class="list-unstyled">
+                                <li><a href='@Url.Action("detalleProductos","Home", new{idProducto = productos.idProducto, nombre = productos.nombre, descripcion = productos.descripcion , idCategoria = productos.idCategoria})'  class="btn btn-success text-white mt-2"><i class="far fa-eye"></i></a></li>
+                                <li><a class="btn btn-success text-white mt-2"href='@Url.Action("AgregarProducto","Home", new{idProducto = productos.idProducto, nombre = productos.nombre, descripcion = productos.descripcion, foto= productos.foto, marca= productos.marca, precio = productos.precio, stock=productos.stock, destacado =productos.destacado ,cantidad = 1})' ><i class="fas fa-cart-plus"></i></a></li>
+                        </ul>
+                     </div>
+                 </div>
+                </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled d-flex justify-content-between">
+                                <li>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                    <i class="text-warning fa fa-star"></i>
+                                </li>
+                                <li class="text-muted text-right">$@productos.precio</li>
+                            </ul>
+                            <a href="shop-single.html" class="h2 text-decoration-none text-dark">@productos.nombre</a>
+                            <p class="card-text">
+                                @productos.descripcion
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                   } }
+               
+                
+              
+            </div>
+            </div>
+  
+    </section>
+   
+
+ 
+
+
+        
+      

@@ -1,0 +1,38 @@
+﻿<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script type = "text/javascript">
+function myfunction() {   
+Swal.fire(
+  'Oops!',
+  'Feature en proceso',
+  'info'
+) 
+         }  
+</script>
+<h3 mb-2 style="text-align: center;">A continuacion puede ver un resumen de su pedido antes de realizarlo</h3>
+@foreach (Producto item in ViewBag.Carrito.ListarProductos().Values)
+{
+    <section class="bg-light">
+    <div class="container-cart" style="margin-bottom:10px;">
+            
+                <h3><img class='cart-img' src=@item.foto alt=""></h3>
+                <h5 class="cart-info">@item.nombre</h5>
+                 <h5 class="cart-info" style="font-weight: bold;">$@item.precio</h5>
+            <h5 class="cart-info" style="font-weight: bold;">@item.cantidad</h5>
+    </div>
+</section>
+}
+<div class="container-cart-total">
+    <div class="col-md-12">
+        <div class="row"> 
+            <div class= "col-md-2"></div>      
+            <div class="col-md-8">
+                <h4>TOTAL :</h4>
+            </div>
+            <div class="col-md-2">
+                <h4 id="total">$@(ViewBag.Carrito.PrecioTotal(ViewBag.Carrito.ListaProductos))</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<button class="btn btn-success w-100" onclick = "myfunction()"> Pedir</button>

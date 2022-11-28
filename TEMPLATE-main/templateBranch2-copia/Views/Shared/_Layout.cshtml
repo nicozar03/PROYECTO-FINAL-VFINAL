@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Vip Papelera</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="~/img/apple-icon.png">
+    <link rel="shortcut icon" type="~/image/x-icon" href="~/img/favicon.ico">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">   <link rel="stylesheet" href="~/css/templatemo.css">
+    <link rel="stylesheet" href="~/css/custom.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="~/css/fontawesome.min.css">
+    <link href="~/Content/sweetalert2.css" rel="stylesheet" />
+    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+@{
+        
+        
+        List<subCategorias> ListasubCategorias= new List<subCategorias>();
+        List<Categorias> ListaCategorias = new List<Categorias>();
+
+        
+        
+        ListaCategorias = BD.ListarCategorias();
+        ViewBag.Categorias = ListaCategorias;
+        
+        ListasubCategorias = BD.ListarsubCategorias();
+        ViewBag.subCategorias = ListasubCategorias;
+
+        
+}
+
+        <header class="w-98">
+            <nav class="navbar navbar-expand-sm navbar-light shadow">
+                 <a class="navbar-brand text-success logo h2 align-self-center" asp-area="" asp-controller="Home" asp-action="Index" style="margin-left:5vw">
+                Vip Papelera
+                 </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto ul">
+                            <li class="li"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index" style="color: #59ab6e">Home</a></li>
+                            <li class="li"><a class="nav-link " asp-area="" asp-controller="Home" asp-action="Productos" style="color: #59ab6e">Productos</a></li>
+                            @{
+                                foreach(Categorias categoria in @ViewBag.Categorias){
+                                    <li class="li">
+                                        <a class="nav-link" style="color: #59ab6e" href='@Url.Action("productosCategorias","Home", new{idCategoria = categoria.idCategoria})'>@categoria.nombre</a>
+                                        <ul class="ul" style='z-index: 2'>
+                                            <div class='row'>
+                                                    @foreach (subCategorias subcategoria in @ViewBag.subCategorias)
+                                                    {
+                                                        if(subcategoria.idCategoria == categoria.idCategoria){
+                                                        <li class="li"><a href='@Url.Action("productosSubcategorias","Home", new{idSubCategoria = subcategoria.idSubcategoria})'>@subcategoria.nombre</a></li>
+                                                    }
+                                                    }
+                                                    </div>
+                                        </ul>
+
+                                    </li>
+                                }   
+                            }
+
+                                
+                         <li class="nav-item li">
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="FAQ" style="color: #59ab6e">FAQ</a>
+                        </li>
+                         <li class="nav-item li">
+                           <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contacto" style="color: #59ab6e">Contacto</a></li>
+                        </li>
+                            
+
+                        </ul>
+                    </div>
+                     <a class="nav-icon position-relative text-decoration-none" asp-area="" asp-controller="Home" asp-action="carrito" >
+                        <i class="fa fa-2x fa-shopping-cart text-dark"  style= "font-size:32px;color:white; margin-right:5vw;"></i>
+                    </a>
+            </nav>
+        </header>
+
+
+
+
+
+
+
+
+
+    
+
+
+ <div class="vw-98">
+            <main role="main">
+                @RenderBody()
+                 <div class="push"></div>
+            </main>
+        </div>
+<div class="vw-98 d-flex justify-content-end" style="margin-top: 2vh">
+    <a href="https://wa.me/5491156591284" class="whatsapp" target="_blank"> <i class="fa fa-2x fa-whatsapp whatsapp-icon"></i></a>
+
+ </div>
+    <!-- Start Footer -->
+    <footer class="bg-dark" id="tempaltemo_footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">Vip Papelera</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li>
+                           <i class="fas fa-map-marker-alt fa-fw"></i>
+                            <a class="text-decoration-none" href="https://www.google.com/maps/place/Vip+%E2%80%A2+Librer%C3%ADa+Comercial+T%C3%A9cnica+y+Escolar/-34.6073491,-58.4478003,15z/data=!4m5!3m4!1s0x0:0x2db9a7c16cc2b6cf!8m2!3d-34.6073295!4d-58.4477946" > Av. San Martín 1316
+                            </a>
+                        </li>
+                        <li>
+                            <i class="fa fa-phone fa-fw"></i>
+                            <a class="text-decoration-none" href="tel:4585-5447">4583-5445</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Productos</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                       @{
+                                foreach(Categorias categoria in @ViewBag.Categorias){
+                                    <li>
+                                        <a class="text-decoration-none" href='@Url.Action("productosCategorias","Home", new{idCategoria = categoria.idCategoria})'>@categoria.nombre</a>
+                                    </li>
+                                }   
+                            }
+                    </ul>
+                </div>
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li><a class="text-decoration-none" href="#">Home</a></li>
+                        <li><a class="text-decoration-none"asp-area="" asp-controller="Home" asp-action="FAQ">FAQs</a></li>
+                        <li><a class="text-decoration-none"asp-area="" asp-controller="Home" asp-action="Contacto">Contacto</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="row text-light mb-4">
+                <div class="col-12 mb-3">
+                    <div class="w-100 my-3 border-top border-light"></div>
+                </div>
+                <div class="col-auto me-auto">
+                    <ul class="list-inline text-left footer-icons">
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="https://www.facebook.com/people/Vip-Papelera/100054717402165/"><i class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="https://www.instagram.com/vip_papelera/?hl=es"><i class="fab fa-instagram fa-lg fa-fw"></i></a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+        <div class="w-100 bg-black py-3">
+            <div class="container">
+                <div class="row pt-2">
+                    <div class="col-12">
+                        <p class="text-left text-light">
+                            Copyright &copy; 2022 Vip Papelera
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- End Footer -->
+    
+
+    <!-- Start Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>  <script src="~/js/jquery-1.11.0.min.js"></script>
+    <script src="~/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/templatemo.js"></script>
+    <script src="~/js/custom.js"></script>
+    <script src="~/js/site.js"></script>
+    <!-- End Script -->
+</body>
+
+</html>
